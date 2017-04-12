@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ -f etape ]; then
+  etape=$(cat etape)
+else
+  etape=0
+  echo $etape > etape
+fi
+
+echo "Commit de la correction du test $etape"
+git add .
+git commit -m "correction de l'étape $etape"
+
+if (( $etape < 8 )); then
+  etape=$((etape+1))
+  echo "Récupération des tests de l'étape $etape"
+  git cherry-pick --allow-empty test-$etape && echo $etape > etape
+else
+  echo "Terminé"
+fi
