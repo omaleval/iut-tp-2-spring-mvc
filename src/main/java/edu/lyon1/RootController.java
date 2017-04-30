@@ -1,6 +1,7 @@
 package edu.lyon1;
 
-import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -16,9 +17,37 @@ public class RootController {
     ModelAndView mav = new ModelAndView();
     mav.addObject("titre", "IUT");
     mav.addObject("corps", "bonjour");
-    mav.addObject("headers", headers.keySet());
+    List<HttpHeader> attributeValue = headers
+        .entrySet()
+        .stream()
+        .map(e -> new HttpHeader(
+            e.getKey(),
+            String.join(",", e.getValue())
+        ))
+        .collect(Collectors.toList());
+    mav.addObject("headers",
+        attributeValue);
     mav.setViewName("template");
     return mav;
+  }
+
+  private class HttpHeader {
+
+    private final String name;
+    private final String value;
+
+    private HttpHeader(String name, String value) {
+      this.name = name;
+      this.value = value;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public String getValue() {
+      return value;
+    }
   }
 
 }
