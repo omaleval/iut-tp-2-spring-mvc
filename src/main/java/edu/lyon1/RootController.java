@@ -1,9 +1,9 @@
 package edu.lyon1;
 
-import java.util.Arrays;
 import java.util.Collections;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class RootController {
 
   @RequestMapping("/")
-  public ModelAndView test(HttpServletRequest request) {
+  public ModelAndView test(@RequestHeader HttpHeaders headers) {
     ModelAndView mav = new ModelAndView();
     mav.addObject("titre", "IUT");
     mav.addObject("corps", "bonjour");
-    mav.addObject("headers", Collections.list(request.getHeaderNames()));
+    mav.addObject("headers", headers.keySet());
     mav.setViewName("template");
     return mav;
   }
