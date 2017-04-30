@@ -46,6 +46,12 @@ public class RootController {
     return new User(prenom, nom);
   }
 
+  @ResponseBody
+  @RequestMapping(value = "/browser", method = RequestMethod.GET)
+  public Browser browser(@RequestHeader("User-Agent") String userAgent) {
+    return new Browser(userAgent);
+  }
+
   private class HttpHeader {
 
     private final String name;
