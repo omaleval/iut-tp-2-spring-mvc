@@ -6,13 +6,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
 public class RootController {
 
-  @RequestMapping("/")
+  @RequestMapping(value = "/", method = RequestMethod.GET)
   public ModelAndView test(@RequestHeader HttpHeaders headers) {
     ModelAndView mav = new ModelAndView();
     mav.addObject("titre", "IUT");
@@ -48,6 +50,12 @@ public class RootController {
     public String getValue() {
       return value;
     }
+  }
+
+  @ResponseBody
+  @RequestMapping(value = "/", method = RequestMethod.POST)
+  public String rootPost() {
+    return "OK";
   }
 
 }
