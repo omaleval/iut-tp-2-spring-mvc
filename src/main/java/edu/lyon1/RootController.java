@@ -34,6 +34,18 @@ public class RootController {
     return mav;
   }
 
+  @ResponseBody
+  @RequestMapping(value = "/", method = RequestMethod.POST)
+  public String rootPost() {
+    return "OK";
+  }
+
+  @ResponseBody
+  @RequestMapping(value = "/user", method = RequestMethod.GET)
+  public User user(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom) {
+    return new User(prenom, nom);
+  }
+
   private class HttpHeader {
 
     private final String name;
@@ -51,18 +63,6 @@ public class RootController {
     public String getValue() {
       return value;
     }
-  }
-
-  @ResponseBody
-  @RequestMapping(value = "/", method = RequestMethod.POST)
-  public String rootPost() {
-    return "OK";
-  }
-
-  @ResponseBody
-  @RequestMapping(value = "/user", method = RequestMethod.GET)
-  public String user(@RequestParam("nom")String nom, @RequestParam("prenom") String prenom) {
-    return prenom+" "+nom;
   }
 
 }
