@@ -38,10 +38,10 @@ public class RootControllerTest {
         .andExpect(status().isOk())
         .andExpect(content().string("<html>\n"
             + "<head>\n"
-            + "    <title>IUT</title>\n"
+            + "    <title>titre</title>\n"
             + "</head>\n"
             + "<body>\n"
-            + "<p>bonjour</p>\n"
+            + "<p>corps</p>\n"
             + "</body>\n"
             + "</html>\n"));
   }
