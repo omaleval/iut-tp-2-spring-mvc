@@ -15,19 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class RootController {
 
-  public List<String> list = new ArrayList<>();
-
   @RequestMapping("/")
   public ModelAndView test(@RequestHeader HttpHeaders headers) {
-
-    Map map = HttpHeaders.getParameterMap();
-
-    //list = Collections.list(headers);
 
     ModelAndView mav = new ModelAndView();
     mav.addObject("titre", "titre");
     mav.addObject("corps", "corps");
-    mav.addObject("liste", list);
+    mav.addObject("liste", headers.keySet());
 
     mav.setViewName("template");
     return mav;
