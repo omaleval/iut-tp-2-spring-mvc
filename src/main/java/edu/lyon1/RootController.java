@@ -1,10 +1,7 @@
 package edu.lyon1;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -21,10 +18,34 @@ public class RootController {
     ModelAndView mav = new ModelAndView();
     mav.addObject("titre", "titre");
     mav.addObject("corps", "corps");
-    mav.addObject("liste", headers.keySet());
-
+    List<HttpHeader> ListeHeaders = headers
+        .entrySet()
+        .stream()
+        .map(e -> new HttpHeader(e.getKey(), String.join(",", e.getValue())))
+        .collect(Collectors.toList());
+    mav.addObject("headers", ListeHeaders);
     mav.setViewName("template");
     return mav;
+  }
+
+  private class HttpHeader{
+
+    final String name;
+    final String value;
+
+    private HttpHeader(String name, String value) {
+      this.name = name;
+      this.value = value;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
   }
 
 }

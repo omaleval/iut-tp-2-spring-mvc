@@ -5,9 +5,11 @@
 <body>
 <p>{{corps}}</p>
 
-{{#liste}}
-{{.}}
-{{/liste}}
+<ul>
+    {{#headers}}
+    <li>{{.}}</li>
+    {{/headers}}
+</ul>
 
 </body>
 </html>
