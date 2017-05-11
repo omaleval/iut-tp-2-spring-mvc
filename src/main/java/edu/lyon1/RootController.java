@@ -59,8 +59,8 @@ public class RootController {
 
   @RequestMapping(value = "/user", method = RequestMethod.GET)
   @ResponseBody
-  public String user(@RequestParam("nom")String nom, @RequestParam("prenom") String prenom) {
-    return prenom+" "+nom;
+  public User user(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom) {
+    return new User(prenom, nom);
   }
 
 }
