@@ -56,4 +56,10 @@ public class RootController {
     return "OK";
   }
 
+  @RequestMapping(value = "/user", method = RequestMethod.GET)
+  @ResponseBody
+  public String user() {
+    return "Olivier";
+  }
+
 }
